@@ -253,6 +253,10 @@ engines:
   codex:
     bin: codex
     model: gpt-5.4
+  copilot:
+    bin: copilot
+    model: gpt-4.1
+    effortLevel: medium
 connectors: {}
 portal: {}
 logging:
@@ -265,7 +269,7 @@ function defaultClaudeMd(portalName: string) {
   return `# ${portalName} AI Gateway
 
 This is the ${portalName} home directory (~/.jinn).
-${portalName} orchestrates Claude Code and Codex as AI engines.
+${portalName} orchestrates Claude Code, Codex, and GitHub Copilot as AI engines.
 `;
 }
 
@@ -311,6 +315,15 @@ export async function runSetup(opts?: { force?: boolean }): Promise<void> {
     info("Install with: npm install -g @openai/codex");
   }
 
+  // 3b. Check for copilot binary
+  const copilotPath = whichBin("copilot");
+  if (copilotPath) {
+    ok(`copilot found at ${copilotPath}`);
+  } else {
+    fail("copilot not found");
+    info("Install with: npm install -g @github/copilot");
+  }
+
   // 4. Check auth / versions
   console.log("");
   if (claudePath) {
@@ -322,6 +335,11 @@ export async function runSetup(opts?: { force?: boolean }): Promise<void> {
     const ver = runVersion("codex");
     if (ver) ok(`codex --version: ${ver}`);
     else warn("codex --version failed");
+  }
+  if (copilotPath) {
+    const ver = runVersion("copilot");
+    if (ver) ok(`copilot --version: ${ver}`);
+    else warn("copilot --version failed");
   }
 
   // 5. Interactive setup (only when stdin is a TTY and config doesn't exist yet)
@@ -335,7 +353,7 @@ export async function runSetup(opts?: { force?: boolean }): Promise<void> {
     : "Jinn";
 
   let chosenName = defaultName;
-  let chosenEngine: "claude" | "codex" = "claude";
+  let chosenEngine: "claude" | "codex" | "copilot" = "claude";
 
   if (isInteractive) {
     console.log("");
@@ -345,12 +363,13 @@ export async function runSetup(opts?: { force?: boolean }): Promise<void> {
     const engines: string[] = [];
     if (claudePath) engines.push("claude");
     if (codexPath) engines.push("codex");
+    if (copilotPath) engines.push("copilot");
 
-    if (engines.length === 2) {
-      const engineAnswer = await prompt("Preferred engine? (claude/codex)", "claude");
-      chosenEngine = engineAnswer === "codex" ? "codex" : "claude";
+    if (engines.length >= 2) {
+      const engineAnswer = await prompt(`Preferred engine? (${engines.join("/")})`, "claude");
+      chosenEngine = engines.includes(engineAnswer) ? engineAnswer as "claude" | "codex" | "copilot" : "claude";
     } else if (engines.length === 1) {
-      chosenEngine = engines[0] as "claude" | "codex";
+      chosenEngine = engines[0] as "claude" | "codex" | "copilot";
       ok(`Using ${chosenEngine} as default engine (only engine installed)`);
     }
   }

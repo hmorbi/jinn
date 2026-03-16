@@ -39,7 +39,7 @@ Field details:
 - `enabled` — boolean, whether the job is active
 - `schedule` — standard cron expression (minute hour day month weekday)
 - `timezone` — IANA timezone string (e.g., `America/New_York`, `Europe/London`, `UTC`)
-- `engine` — AI engine to run the job: `claude` or `codex`
+- `engine` — AI engine to run the job: `claude`, `codex`, or `copilot`
 - `model` — model identifier (e.g., `sonnet`, `opus`, `o3`)
 - `employee` — optional, the employee persona to use (must match an employee name in the org)
 - `prompt` — the instruction to execute when the job fires

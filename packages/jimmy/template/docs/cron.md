@@ -11,7 +11,7 @@ interface CronJob {
   enabled: boolean;      // Whether the job is active
   schedule: string;      // Cron expression (standard 5-field)
   timezone?: string;     // IANA timezone (default: system timezone)
-  engine: string;        // "claude" or "codex"
+  engine: string;        // "claude", "codex", or "copilot"
   model?: string;        // Override default model
   employee?: string;     // Employee persona to use
   prompt: string;        // The prompt to send to the engine

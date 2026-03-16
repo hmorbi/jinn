@@ -538,7 +538,7 @@ function buildEvolutionContext(portalName: string): string {
  */
 function buildDelegationProtocol(gatewayUrl: string, _portalName: string, config?: JinnConfig): string {
   const defaultEngine = config?.engines.default || "claude";
-  const engineConfig = defaultEngine === "codex" ? config?.engines.codex : config?.engines.claude;
+  const engineConfig = config?.engines[defaultEngine as "claude" | "codex" | "copilot"] ?? config?.engines.claude;
   const childOverride = engineConfig?.childEffortOverride;
 
   const effortOverrideNote = childOverride

@@ -1,6 +1,6 @@
 # 🧞 Jinn
 
-Lightweight AI gateway daemon orchestrating Claude Code and Codex.
+Lightweight AI gateway daemon orchestrating Claude Code, Codex, and GitHub Copilot.
 
 <p align="center">
   <img src="assets/jinn-showcase.gif" alt="Jinn Web Dashboard" width="800" />
@@ -8,16 +8,16 @@ Lightweight AI gateway daemon orchestrating Claude Code and Codex.
 
 ## What is Jinn?
 
-Jinn is an open-source AI gateway that wraps the Claude Code CLI and Codex SDK
-behind a unified daemon process. It routes tasks to AI engines, manages
-connectors like Slack, and schedules background work via cron. Jinn is a bus,
-not a brain.
+Jinn is an open-source AI gateway that wraps the Claude Code CLI, Codex SDK, and
+GitHub Copilot CLI/SDK behind a unified daemon process. It routes tasks to AI
+engines, manages connectors like Slack, and schedules background work via cron.
+Jinn is a bus, not a brain.
 
 ## 💡 Why Jinn?
 
 Most AI agent frameworks reinvent the wheel — custom tool-calling loops, brittle context management, hand-rolled retry logic. Then they charge you per API call on top.
 
-**Jinn takes a different approach.** It wraps battle-tested professional CLI tools (Claude Code, Codex) and adds only what they're missing: routing, scheduling, connectors, and an org system.
+**Jinn takes a different approach.** It wraps battle-tested professional CLI tools (Claude Code, Codex, GitHub Copilot) and adds only what they're missing: routing, scheduling, connectors, and an org system.
 
 ### 🔑 Works with your Anthropic Max subscription
 
@@ -47,7 +47,7 @@ When Claude Code gets better, Jinn gets better — automatically.
 
 ## ✨ Features
 
-- 🔌 **Dual engine support** — Claude Code CLI + Codex SDK
+- 🔌 **Triple engine support** — Claude Code CLI + Codex SDK + GitHub Copilot CLI/SDK
 - 💬 **Slack integration** — thread-aware routing with reaction workflow
 - ⏰ **Cron scheduling** — hot-reloadable background jobs
 - 👥 **AI org system** — departments, ranks, managers, employees, task boards
@@ -85,6 +85,7 @@ Then open [http://localhost:7777](http://localhost:7777).
       +-------v-------+ +------v------+  +-----------v---+
       |    Engines     | | Connectors  |  |    Web UI     |
       | Claude | Codex | |   Slack     |  | localhost:7777|
+      |    Copilot     | |             |  |               |
       +----------------+ +-------------+  +---------------+
               |                 |
       +-------v-------+ +------v------+
@@ -94,8 +95,8 @@ Then open [http://localhost:7777](http://localhost:7777).
 ```
 
 The CLI sends commands to the gateway daemon. The daemon dispatches work to AI
-engines (Claude Code, Codex), manages connector integrations, runs scheduled
-cron jobs, and serves the web dashboard.
+engines (Claude Code, Codex, GitHub Copilot), manages connector integrations,
+runs scheduled cron jobs, and serves the web dashboard.
 
 ## ⚙️ Configuration
 
@@ -109,6 +110,8 @@ engines:
   claude:
     enabled: true
   codex:
+    enabled: false
+  copilot:
     enabled: false
 
 connectors:
@@ -174,7 +177,8 @@ Jinn is under active development. Here's what's coming:
 - [ ] **Webhooks** — generic inbound/outbound HTTP webhooks
 
 ### 🧠 Engines
-- [ ] **Gemini CLI** — Google's Gemini as a third engine option
+- [x] **GitHub Copilot CLI/SDK** — GitHub Copilot as a third engine option
+- [ ] **Gemini CLI** — Google's Gemini as a fourth engine option
 - [ ] **Local models** — Ollama / llama.cpp integration for offline use
 - [ ] **Engine fallback chains** — auto-failover when primary engine is unavailable
 

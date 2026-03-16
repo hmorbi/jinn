@@ -23,6 +23,10 @@ Claude Code has native skill creation capabilities. Defer to the engine's built-
 
 Create the SKILL.md file manually following the conventions below. Write the file directly to `~/.jinn/skills/<skill-name>/SKILL.md`.
 
+### GitHub Copilot (copilot engine)
+
+Create the SKILL.md file manually following the conventions below. Write the file directly to `~/.jinn/skills/<skill-name>/SKILL.md`. The Copilot CLI discovers skills the same way as Codex.
+
 ## Steps
 
 1. Ask the user what the skill should do. Get a clear description of the capability.
@@ -68,7 +72,7 @@ Include example inputs, outputs, file contents, and commands wherever possible. 
 
 ## Template
 
-Use this template as a starting point. **YAML frontmatter is required** — both Claude Code and Codex CLIs discover skills by reading frontmatter from `SKILL.md` files. Without it, the skill won't be recognized by engines.
+Use this template as a starting point. **YAML frontmatter is required** — Claude Code, Codex, and Copilot CLIs discover skills by reading frontmatter from `SKILL.md` files. Without it, the skill won't be recognized by engines.
 
 ```markdown
 ---

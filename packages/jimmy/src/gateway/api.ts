@@ -1190,7 +1190,9 @@ async function runWebSession(
 
     const engineConfig = currentSession.engine === "codex"
       ? config.engines.codex
-      : config.engines.claude;
+      : currentSession.engine === "copilot"
+        ? config.engines.copilot
+        : config.engines.claude;
     const effortLevel = resolveEffort(engineConfig, currentSession, employee);
 
     let lastHeartbeatAt = 0;
