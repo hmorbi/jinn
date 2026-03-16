@@ -251,9 +251,10 @@ export interface JinnConfig {
   jinn?: { version?: string };
   gateway: { port: number; host: string; streaming?: boolean };
   engines: {
-    default: "claude" | "codex";
+    default: "claude" | "codex" | "copilot";
     claude: { bin: string; model: string; effortLevel?: string; childEffortOverride?: string };
     codex: { bin: string; model: string; effortLevel?: string; childEffortOverride?: string };
+    copilot: { bin: string; model: string; effortLevel?: string; childEffortOverride?: string };
   };
   connectors: Record<string, any> & {
     web?: WebConnectorConfig;

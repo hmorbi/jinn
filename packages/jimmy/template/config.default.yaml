@@ -15,6 +15,10 @@ engines:
     bin: codex
     model: gpt-5.4
     effortLevel: high
+  copilot:
+    bin: copilot
+    model: gpt-4.1
+    effortLevel: medium
 
 connectors:
   slack:

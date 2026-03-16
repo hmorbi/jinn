@@ -168,9 +168,8 @@ export class SessionManager {
         channelName: (msg.transportMeta?.channelName as string) || undefined,
       });
 
-      const engineConfig = session.engine === "codex"
-        ? this.config.engines.codex
-        : this.config.engines.claude;
+      const engineConfig = this.config.engines[session.engine as "claude" | "codex" | "copilot"]
+        ?? this.config.engines.claude;
       if (session.engine === "claude") {
         const mcpConfig = resolveMcpServers(this.config.mcp, employee);
         if (Object.keys(mcpConfig.mcpServers).length > 0) {
@@ -296,7 +295,7 @@ export class SessionManager {
         `Session: ${session.id}`,
         `Engine: ${session.engine}`,
         `Connector: ${session.connector || session.source}`,
-        `Model: ${session.model || this.config.engines[session.engine as "claude" | "codex"]?.model || "default"}`,
+        `Model: ${session.model || this.config.engines[session.engine as "claude" | "codex" | "copilot"]?.model || "default"}`,
         `State: ${transportState}`,
         `Queue depth: ${queueDepth}`,
         `Created: ${session.createdAt}`,
@@ -341,6 +340,7 @@ export class SessionManager {
         `Default engine: ${this.config.engines.default}`,
         `Claude: ${this.config.engines.claude.model}`,
         `Codex: ${this.config.engines.codex.model}`,
+        `Copilot: ${this.config.engines.copilot.model}`,
         "Connectors:",
         ...connectorLines,
       ].join("\n");

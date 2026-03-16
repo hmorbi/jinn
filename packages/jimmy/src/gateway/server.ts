@@ -12,6 +12,7 @@ import { initDb, recoverStaleSessions, getInterruptedSessions, listSessions, upd
 import { SessionManager } from "../sessions/manager.js";
 import { ClaudeEngine } from "../engines/claude.js";
 import { CodexEngine } from "../engines/codex.js";
+import { CopilotEngine } from "../engines/copilot.js";
 import { handleApiRequest, type ApiContext } from "./api.js";
 import { ensureFilesDir } from "./files.js";
 import { initStt } from "../stt/stt.js";
@@ -123,9 +124,11 @@ export async function startGateway(
   // Set up engines
   const claudeEngine = new ClaudeEngine();
   const codexEngine = new CodexEngine();
-  const engines = new Map<string, InstanceType<typeof ClaudeEngine> | InstanceType<typeof CodexEngine>>();
+  const copilotEngine = new CopilotEngine();
+  const engines = new Map<string, InstanceType<typeof ClaudeEngine> | InstanceType<typeof CodexEngine> | InstanceType<typeof CopilotEngine>>();
   engines.set("claude", claudeEngine);
   engines.set("codex", codexEngine);
+  engines.set("copilot", copilotEngine);
 
   // Derive connector names from config
   const connectorNames: string[] = [];
@@ -389,6 +392,7 @@ export async function startGateway(
     // Terminate live engine subprocesses after marking sessions.
     claudeEngine.killAll();
     codexEngine.killAll();
+    copilotEngine.killAll();
 
     // Stop cron scheduler
     stopScheduler();

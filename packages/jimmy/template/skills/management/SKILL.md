@@ -44,7 +44,7 @@ Required fields:
 - `displayName` — human-readable name
 - `department` — department this employee belongs to (must match parent directory name)
 - `rank` — one of: executive, manager, senior, employee
-- `engine` — AI engine to use: `claude` or `codex`
+- `engine` — AI engine to use: `claude`, `codex`, or `copilot`
 - `model` — model identifier (e.g., `sonnet`, `opus`, `o3`)
 - `persona` — multiline description of who this employee is and how they behave
 

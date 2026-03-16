@@ -64,7 +64,7 @@ export async function runCronJob(
       {
         employee,
         engine: job.engine || employee?.engine || config.engines.default,
-        model: job.model || employee?.model || config.engines[(job.engine || config.engines.default) as "claude" | "codex"]?.model,
+        model: job.model || employee?.model || config.engines[(job.engine || config.engines.default) as "claude" | "codex" | "copilot"]?.model,
         title: job.name,
       },
     );

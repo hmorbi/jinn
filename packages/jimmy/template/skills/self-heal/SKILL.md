@@ -30,7 +30,7 @@ Read `~/.jinn/config.yaml` and verify:
 - The file is valid YAML (no syntax errors)
 - The `port` field is a valid number (typically 3777)
 - Required fields are present: `port`, `engine`, `model`
-- Engine value is one of: `claude`, `codex`
+- Engine value is one of: `claude`, `codex`, `copilot`
 - No duplicate keys or malformed values
 
 ### 3. Verify Engine Availability
@@ -38,6 +38,7 @@ Read `~/.jinn/config.yaml` and verify:
 Check that the configured AI engine is installed and accessible:
 - For Claude: run `claude --version` and confirm it returns a version number
 - For Codex: run `codex --version` and confirm it returns a version number
+- For Copilot: run `copilot --version` and confirm it returns a version number
 
 If the engine command is not found, inform the user that the engine is not installed or not on their PATH.
 

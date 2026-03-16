@@ -27,7 +27,7 @@ persona: |
 | `displayName` | string | yes | Human-readable name |
 | `department` | string | yes | Department directory name |
 | `rank` | string | yes | One of: executive, manager, senior, employee |
-| `engine` | string | yes | Engine to use: "claude" or "codex" |
+| `engine` | string | yes | Engine to use: "claude", "codex", or "copilot" |
 | `model` | string | no | Model override (default from config) |
 | `persona` | string | yes | System prompt defining personality and behavior |
 

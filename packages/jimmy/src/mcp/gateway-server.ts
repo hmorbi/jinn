@@ -77,7 +77,7 @@ const TOOLS = [
         employee: { type: "string", description: "Employee name to delegate to (e.g. 'homy-writer')" },
         prompt: { type: "string", description: "Task/instruction for the employee" },
         parentSessionId: { type: "string", description: "Your current session ID (for tracking)" },
-        engine: { type: "string", description: "Engine override (claude or codex)" },
+        engine: { type: "string", description: "Engine override (claude, codex, or copilot)" },
         model: { type: "string", description: "Model override" },
       },
       required: ["employee", "prompt"],

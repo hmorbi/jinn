@@ -46,6 +46,7 @@ Central router. Receives messages from connectors, resolves the target employee 
 Uniform interface over different AI backends:
 - **Claude Engine**: Spawns `claude` CLI as a child process with `--resume` for session continuity
 - **Codex Engine**: Uses the Codex SDK directly in-process
+- **Copilot Engine**: Spawns GitHub Copilot CLI with JSON output for agent-mode execution
 
 ### Connector System
 Modular adapters that implement a standard interface. Each connector translates between its platform's message format and {{portalName}}'s internal message format. See `connectors.md`.
